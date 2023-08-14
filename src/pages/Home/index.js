@@ -11,7 +11,7 @@ import backWomen from '../../assets/backWomen.jpg'
 import backMen from '../../assets/backMen.jpg'
 import eletronics from '../../assets/eletronics.jpg'
 import joiasBack from '../../assets/joias.png'
-import biggest from '../../assets/main.png'
+import main from '../../assets/main.png'
 
 import * as S from "./styles";
 
@@ -77,7 +77,7 @@ export default function Home() {
             </S.SeeProductsCards>
 
             <S.SeeProductsCards>
-                <img src={biggest} height={600} alt="Banner 1" />
+                <img src={main} height={600} alt="Banner 1" />
                 </S.SeeProductsCards>
 
 

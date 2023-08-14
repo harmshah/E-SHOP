@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom'
 
-import { FaTimes, FaTrash, FaStore, FaAngleDown } from 'react-icons/fa'
+import { FaTimes, FaTrash } from 'react-icons/fa'
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
