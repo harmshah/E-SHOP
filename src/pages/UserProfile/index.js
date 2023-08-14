@@ -43,11 +43,11 @@ export default function UserProfile() {
                 <S.SeeProductsCards>
                     <div className="card text-center h-100">
                         <div className="form my-3" style={{ marginBottom: '10px' }}>
-                            <label htmlFor="firstName" style={{ marginRight: '10px', fontWeight: "bold"  }}>FirstName: </label>
+                            <label htmlFor="firstName" style={{ marginRight: '10px', fontWeight: "bold" }}>FirstName: </label>
                             {userData.firstname}
                         </div>
                         <div className="form my-3" style={{ marginBottom: '10px' }}>
-                            <label htmlFor="lastName" style={{ marginRight: '10px', fontWeight: "bold"  }}>LastName: </label>
+                            <label htmlFor="lastName" style={{ marginRight: '10px', fontWeight: "bold" }}>LastName: </label>
                             {userData.lastname}
                         </div>
                         <div className="form my-3" style={{ marginBottom: '10px' }}>
@@ -55,7 +55,7 @@ export default function UserProfile() {
                             {userEmail}
                         </div>
                         <div className="form my-3" style={{ marginBottom: '10px' }}>
-                            <label htmlFor="password" style={{ marginRight: '10px', fontWeight: "bold"  }}>Password: </label>
+                            <label htmlFor="password" style={{ marginRight: '10px', fontWeight: "bold" }}>Password: </label>
                             {userData.pass}
                         </div>
                     </div>

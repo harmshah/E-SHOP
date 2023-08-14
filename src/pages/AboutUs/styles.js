@@ -45,3 +45,12 @@ export const SomeProducts = styled.div`
         }
     }
 `
+
+export const SeeProductsCards = styled.div`
+    display: flex;
+    max-width: 95vw;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2rem auto 2rem auto;
+    gap: 1rem;
+`
