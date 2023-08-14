@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-import InputControl from "../InputControl"; // Import the InputControl component
+import InputControl from "../Input/InputControl"; // Import the InputControl component
 import { auth } from "../../services/firebase"; // Import the auth object from "../firebase"
 
 import styles from "./Login.module.css"; // Import the CSS module for styling
