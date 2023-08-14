@@ -1,5 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 
+// Import your page components
 import Home from '../pages/Home'
 import Products from '../pages/Products'
 import Women from '../pages/Women'
@@ -23,9 +24,11 @@ import Footer from '../components/Footer'
 export default function MainRoutes() {
     return (
         <>
+            {/* Include the Header component */}
             <Header />
             <div className="container">
                 <Switch>
+                    {/* Define your routes using Route components */}
                     <Route exact path="/" component={Home} />
                     <Route exact path="/products" component={Products} />
                     <Route exact path="/women" component={Women} />
@@ -36,15 +39,15 @@ export default function MainRoutes() {
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/profile" component={UserProfile} />
-                    <Route exact path="/userlist" component={UserList} />
-                    
+                    <Route exact path="/userlist" component={UserList} /> 
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/reset" component={Forgot} />
                     <Route exact path="/delivery" component={Delivery} />
                     <Route exact path="/payment" component={Payment} />
-                    <Route path="*" component={NotFound} />
+                    <Route path="*" component={NotFound} /> {/* Catch-all route for 404 */}
                 </Switch>
             </div>
+            {/* Include the Footer component */}
             <Footer />
         </>
     )

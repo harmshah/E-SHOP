@@ -1,4 +1,4 @@
-
+// Define an object named 'devices' with media query strings for different screen sizes
   const devices = {
     mobileS: '(max-width: 320px)',
     mobileM: '(max-width: 375px)',
@@ -8,5 +8,5 @@
     laptopL: '(max-width: 1280px)',
     desktop: '(max-width: 1366px)',
 }
-
+// Export the 'devices' object to make it available for other modules
 export default devices

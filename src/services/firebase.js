@@ -3,13 +3,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database"; // Import the database module
 
-//import firebase from 'firebase/compat/app';
-//import 'firebase/compat/auth';
-//import 'firebase/compat/firestore';
-//import 'firebase/database';
-
-
-
 // Firebase config data
 const firebaseConfig = {
   apiKey: "AIzaSyCELUpXhpDz9jIpPv85JaqTQKI98ZOHvjY",
@@ -29,12 +22,5 @@ const auth = getAuth();
 
 // Get the database instance from Firebase
 const database = getDatabase(app);
-
-
-//if(!firebase.apps.length){
-//  firebase.initializeApp(firebaseConfig);
-//}
-
-//export default firebase;
 
 export { app, auth, database };
