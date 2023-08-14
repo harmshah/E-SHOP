@@ -34,7 +34,15 @@ function Login() {
       history.push("/");
     } catch (error) {
       setSubmitButtonDisabled(false);
-      setErrorMsg(error.message);
+      if (error.message == "Firebase: Error (auth/user-not-found).") {
+        error.message = "Please enter correct Username."
+      }
+      else if (error.message == "Firebase: Error (auth/wrong-password).") {
+        error.message = "Please enter correct Password."
+      }
+      else{
+        setErrorMsg(error.message);
+      }
     }
   };
 

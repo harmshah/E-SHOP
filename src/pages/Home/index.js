@@ -47,7 +47,7 @@ export default function Home() {
                     <img src={backMen} alt="Men's Clothing Image" />
                     <S.ContentProductCard>
                         <h1>Men's Clothing</h1>
-\                        <Link to="/men">View Products</Link>
+                        <Link to="/men">View Products</Link>
                     </S.ContentProductCard>
                 </S.ProductCard>
 
@@ -55,7 +55,7 @@ export default function Home() {
                     <img src={backWomen} alt="Women's Clothing Image" />
                     <S.ContentProductCard>
                         <h1>Women's Clothing</h1>
-\                        <Link to="/women">View Products</Link>
+                      <Link to="/women">View Products</Link>
                     </S.ContentProductCard>
                 </S.ProductCard>
 
@@ -63,7 +63,7 @@ export default function Home() {
                     <img src={eletronics} alt="Electronics Image" />
                     <S.ContentProductCard>
                         <h1>Electronics</h1>
-\                        <Link to="/electronics">View Products</Link>
+                       <Link to="/electronics">View Products</Link>
                     </S.ContentProductCard>
                 </S.ProductCard>
 
@@ -71,7 +71,7 @@ export default function Home() {
                     <img src={joiasBack} alt="Jewelery Image" />
                     <S.ContentProductCard>
                         <h1>Jewelery</h1>
-\                        <Link to="/jewelery">View Products</Link>
+                       <Link to="/jewelery">View Products</Link>
                     </S.ContentProductCard>
                 </S.ProductCard>
             </S.SeeProductsCards>
