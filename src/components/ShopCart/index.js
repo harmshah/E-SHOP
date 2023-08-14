@@ -1,89 +1,76 @@
+// Importing necessary dependencies, components, and styles
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom'
-
-import { FaTimes, FaTrash } from 'react-icons/fa'
-
+import { Link } from 'react-router-dom';
+import { FaTimes, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import * as S from './style'; // Importing styles from a file
 
-import * as S from './style';
-
-
+// Defining the ShopCart component
 export default function ShopCart({ sidebar }) {
+    // State variables
+    const [showCart, setShowCart] = useState(sidebar);
+    const [productsOnCart, setProductsOnCart] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [qtdItems, setQtdItems] = useState(0);
+    const [optionsCart, setOptionsCart] = useState(false);
 
-    const [showCart, setShowCart] = useState(sidebar)
-
-    const [productsOnCart, setProductsOnCart] = useState([])
-    const [total, setTotal] = useState(0)
-    const [qtdItems, setQtdItems] = useState(0)
-    const [optionsCart, setOptionsCart] = useState(false)
-
+    // Effect to load products from local storage
     useEffect(() => {
-        const listaProducts = localStorage.getItem('products')
-        setProductsOnCart(JSON.parse(listaProducts) || [])
-        console.log(productsOnCart)
-    }, [])
+        const listaProducts = localStorage.getItem('products');
+        setProductsOnCart(JSON.parse(listaProducts) || []);
+        console.log(productsOnCart);
+    }, []);
 
-    useCallback(() => {
-        const listaProducts = localStorage.getItem('products')
-        setProductsOnCart(JSON.parse(listaProducts) || [])
+    // Callback to update productsOnCart from local storage
+    const updateProductsOnCart = useCallback(() => {
+        const listaProducts = localStorage.getItem('products');
+        setProductsOnCart(JSON.parse(listaProducts) || []);
+    }, []);
 
-    }, [productsOnCart])
-
-
+    // Function to delete a product from the cart
     function deleteProduct(productId) {
         let filteredProducts = productsOnCart.filter((item) => {
-            return (item.id != productId)
-        })
+            return item.id !== productId;
+        });
 
         setProductsOnCart(filteredProducts);
         localStorage.setItem('products', JSON.stringify(filteredProducts));
         toast.success('Product successfully removed from the cart.', {
-            position: "top-left",
-            autoClose: 900,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
+            // Toast configuration
         });
-
     }
 
+    // Functions to manage quantity
     function removeQuantity(qtd, index) {
         if (productsOnCart[index].quantity === 1) {
-            toast.info('At least 1 product required!', {
-                position: "top-left",
-                autoClose: 900,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            // Toast indicating minimum quantity
             return;
         }
         productsOnCart[index].quantity = qtd - 1;
+        updateProductsOnCart();
     }
-
 
     function addQuantity(qtd, index) {
-        productsOnCart[index].quantity = qtd + 1
+        productsOnCart[index].quantity = qtd + 1;
+        updateProductsOnCart();
     }
 
+    // Effect to calculate total price and quantity
     useEffect(() => {
         let totalPrice = 0;
         let qtd = 0;
 
-        productsOnCart.forEach((item, index) => {
-            totalPrice += item.price * item.quantity
-            qtd += item.quantity
-        })
-        setTotal(totalPrice.toFixed(2))
-        setQtdItems(qtd)
-    })
+        productsOnCart.forEach((item) => {
+            totalPrice += item.price * item.quantity;
+            qtd += item.quantity;
+        });
 
+        setTotal(totalPrice.toFixed(2));
+        setQtdItems(qtd);
+    }, [productsOnCart]);
 
+    // Rendering the ShopCart component
 
     return (
         <>

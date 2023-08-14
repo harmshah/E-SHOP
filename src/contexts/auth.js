@@ -3,14 +3,17 @@ import { app, auth, database } from '../services/firebase'; // Adjust the path a
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+// Creating an AuthContext to provide authentication data to child components
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
     const history = useHistory();
 
+    // State variables to manage user data and loading state
     const [user, setUser] = useState(null);
     const [loadingAuth, setLoadingAuth] = useState(false);
 
+// useEffect to load user data from local storage
     useEffect(() => {
         function loadStorage() {
             const storageUser = localStorage.getItem('SystemUser');
@@ -22,13 +25,16 @@ function AuthProvider({ children }) {
         loadStorage();
     }, []);
 
+    // Function to handle user registration
     async function signUp(firstname, lastname, username, pass) {
         setLoadingAuth(true);
 
         try {
+            // Registering the user with Firebase Authentication
             const userCredential = await auth.createUserWithEmailAndPassword(username, pass);
             const uid = userCredential.user.uid;
 
+            // Storing user data in Firebase Realtime Database
             await database.ref('users').child(uid).set({
                 firstname,
                 lastname,
@@ -44,6 +50,7 @@ function AuthProvider({ children }) {
                 username,
             };
 
+            // Updating user data
             setUser(data);
             storageUser(data);
             toast.success('Registration completed successfully!');
@@ -86,6 +93,7 @@ function AuthProvider({ children }) {
                 pass: userProfile.val().pass,
             };
 
+            // Updating user data in the component state and local storage            
             setUser(data);
             storageUser(data);
             toast.success('Welcome back!');
@@ -96,6 +104,7 @@ function AuthProvider({ children }) {
         }
     }
 
+    // Providing authentication-related values to child components
     return (
         <AuthContext.Provider
             value={{

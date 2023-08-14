@@ -1,8 +1,11 @@
+// Importing necessary dependencies and styles
 import React, { useEffect, useState, createContext } from 'react';
 import api from '../services/api'
 
+// Creating the ApiContext to use for providing data
 export const ApiContext = createContext({})
 
+// Defining the ApiProvider component
 export const ApiProvider = ({ children }) => {
 
     const [allProducts, setAllProducts] = useState([])
@@ -10,9 +13,11 @@ export const ApiProvider = ({ children }) => {
     const [jeweleryProducts, setJeweleryProducts] = useState([])
     const [electronicsProducts, setElectronicsProducts] = useState([])
     const [womenProducts, setWomenProducts] = useState([]);
-
+ 
+    // Loading state variable to indicate API loading status
     const [loading, setLoading] = useState(true);
 
+    // Fetching data from the API using useEffect
     useEffect(() => {
         setLoading(true)
         api
@@ -27,6 +32,7 @@ export const ApiProvider = ({ children }) => {
         })
     }, [])
 
+    // Fetching products by category
     useEffect(() => {
         api
         .get(`/products/category/${encodeURIComponent("men's clothing")}`)
@@ -75,7 +81,7 @@ export const ApiProvider = ({ children }) => {
     }, [])
 
     return (
-
+        // Providing the context values to child components
         <ApiContext.Provider
             value={{
                 allProducts,

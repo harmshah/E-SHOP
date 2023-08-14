@@ -1,37 +1,41 @@
+// Importing necessary dependencies, components, and styles
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom'
-
-import { AuthContext } from '../../contexts/auth'
-
-import { FiShoppingCart, FiMenu, FiLogOut } from 'react-icons/fi'
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../contexts/auth';
+import { FiShoppingCart, FiMenu, FiLogOut } from 'react-icons/fi';
 import ShopCart from '../ShopCart';
+import * as S from "./styles"; // Importing styles from a file
 
-import * as S from "./styles"
-
+// Defining the Header component
 export default function Header() {
+  // Accessing user data and functions from AuthContext
+  const { storageUser, user, signOut } = useContext(AuthContext);
 
-  const { storageUser, user, signOut } = useContext(AuthContext)
-
+  // State variables
   const [showSidebar, setShowSidebar] = useState(false);
   const [productsOnCart, setProductsOnCart] = useState([]);
   const [qtdItems, setQtdItems] = useState(0);
   const [showNav, setShowNav] = useState(false);
-  const [searchProducts, setSearchProducts] = useState('')
-  const [navProducts, setNavProducts] = useState(false)
+  const [searchProducts, setSearchProducts] = useState('');
+  const [navProducts, setNavProducts] = useState(false);
 
+  // Effect to update productsOnCart when local storage changes
   useEffect(() => {
-    const listaProducts = localStorage.getItem('products')
-    setProductsOnCart(JSON.parse(listaProducts) || [])
-  }, [[], productsOnCart])
+    const listaProducts = localStorage.getItem('products');
+    setProductsOnCart(JSON.parse(listaProducts) || []);
+  }, [productsOnCart]);
 
+  // Effect to calculate and update qtdItems based on productsOnCart
   useEffect(() => {
     let qtd = 0;
 
-    productsOnCart.forEach((item, index) => {
-      qtd += item.quantity
-    })
-    setQtdItems(qtd)
-  }, [[], productsOnCart, qtdItems])
+    productsOnCart.forEach((item) => {
+      qtd += item.quantity;
+    });
+
+    setQtdItems(qtd);
+  }, [productsOnCart, qtdItems]);
+
 
   return (
     <>
@@ -39,6 +43,7 @@ export default function Header() {
         <S.ContainerLeft>
           <Link to="/"><h1>E-shop</h1></Link>
           <S.Nav>
+             {/* Navigation links */}
             <li
               onMouseEnter={() => setNavProducts(true)} className={navProducts ? 'navProducts' : 'navProductsOff'}  >
               <NavLink to="/products"
@@ -86,7 +91,8 @@ export default function Header() {
 
           </S.Nav>
         </S.ContainerLeft>
-
+        
+        {/* Right section of the header */}
         <S.ContainerRight>
           
           <S.DivAccount>
@@ -117,6 +123,7 @@ export default function Header() {
           <S.Bar>{qtdItems}</S.Bar>
         </S.ContainerRight>
 
+        {/* Hamburger menu */}
         <S.MenuHamburguer>
           <FiMenu onClick={() => setShowNav(!showNav)} />
           {showNav &&
@@ -134,7 +141,8 @@ export default function Header() {
         </S.MenuHamburguer>
 
       </S.MainContainer>
-
+      
+      {/* Displaying the ShopCart component */}
       {showSidebar && <ShopCart sidebar={showSidebar} />}
     </>
   )
