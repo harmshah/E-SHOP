@@ -11,7 +11,7 @@ import backWomen from '../../assets/backWomen.jpg'
 import backMen from '../../assets/backMen.jpg'
 import eletronics from '../../assets/eletronics.jpg'
 import joiasBack from '../../assets/joias.png'
-import biggest from '../../assets/biggest1.png'
+import biggest from '../../assets/main.png'
 
 import * as S from "./styles";
 
@@ -46,7 +46,7 @@ export default function Home() {
         <S.Container>
             <S.SeeProductsCards>
                 <S.ProductCard>
-                    <img src={backMen} alt="Imagem roupa masculina" />
+                    <img src={backMen} alt="Men's Clothing Image" />
                     <S.ContentProductCard>
                         <h1>Men's Clothing</h1>
 \                        <Link to="/men">View Products</Link>
@@ -54,7 +54,7 @@ export default function Home() {
                 </S.ProductCard>
 
                 <S.ProductCard>
-                    <img src={backWomen} alt="Imagem roupa feminina" />
+                    <img src={backWomen} alt="Women's Clothing Image" />
                     <S.ContentProductCard>
                         <h1>Women's Clothing</h1>
 \                        <Link to="/women">View Products</Link>
@@ -62,7 +62,7 @@ export default function Home() {
                 </S.ProductCard>
 
                 <S.ProductCard>
-                    <img src={eletronics} alt="Imagem eletrônicos" />
+                    <img src={eletronics} alt="Electronics Image" />
                     <S.ContentProductCard>
                         <h1>Electronics</h1>
 \                        <Link to="/electronics">View Products</Link>
@@ -70,7 +70,7 @@ export default function Home() {
                 </S.ProductCard>
 
                 <S.ProductCard>
-                    <img src={joiasBack} alt="Imagem joias" />
+                    <img src={joiasBack} alt="Jewelery Image" />
                     <S.ContentProductCard>
                         <h1>Jewelery</h1>
 \                        <Link to="/jewelery">View Products</Link>
@@ -78,9 +78,9 @@ export default function Home() {
                 </S.ProductCard>
             </S.SeeProductsCards>
 
-            <div>
+            <S.SeeProductsCards>
                 <img src={biggest} height={600} alt="Banner 1" />
-            </div>
+                </S.SeeProductsCards>
 
 
             <S.TitleProducts>

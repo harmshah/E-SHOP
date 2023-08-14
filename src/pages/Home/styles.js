@@ -25,8 +25,8 @@ export const SeeProductsCards = styled.div`
 export const ProductCard = styled.div`
     display: flex;
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
     flex: none;
     flex-direction: column;
     justify-content: center;
