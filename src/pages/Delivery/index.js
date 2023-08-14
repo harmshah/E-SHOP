@@ -37,6 +37,7 @@ export default function Delivery() {
             <S.ContainerMain>
 
                 <S.ContainerData>
+                    {/* Contact information form */}
                     <div>
                         <S.Form>
                             <h3>CONTACT INFORMATION</h3>
@@ -50,6 +51,7 @@ export default function Delivery() {
                         </S.Form>
                     </div>
 
+                    {/* Delivery information */}
                     <S.DivMid>
                         <h3>DELIVERY</h3>
                         <select disabled>
@@ -67,7 +69,7 @@ export default function Delivery() {
                         </Link>
                     </S.ButtonContinue>
                 </S.ContainerData>
-
+                {/* Summary of products */}
                 <S.ContainerTotal>
                     {productsOnCart.map(item => (
                         <S.Product key={item.id}>

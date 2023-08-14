@@ -1,13 +1,12 @@
+// Importing necessary dependencies and styles
 import React, { useContext } from 'react';
-import { ApiContext } from '../../contexts/apiContext'
+import { ApiContext } from '../../contexts/apiContext'; // Importing the ApiContext
+import CardProduct from '../../components/CardProduct'; // Importing the CardProduct component
+import * as S from "./styles"; // Importing styles from a file
 
-import CardProduct from '../../components/CardProduct'
-
-import * as S from "./styles";
-
-export default function Eletronics() {
-    
-    const { electronicsProducts } = useContext(ApiContext)
+// Defining the Electronics component
+export default function Electronics() {
+    const { electronicsProducts } = useContext(ApiContext); // Using the ApiContext to get electronicsProducts
 
     return (
         <>
@@ -19,6 +18,7 @@ export default function Eletronics() {
 
             <S.SomeProducts>
                 <ul>
+                    {/* Rendering each electronics product using the CardProduct component */}
                     {electronicsProducts.map((item) => (
                         <CardProduct
                             key={item.id}
@@ -33,5 +33,5 @@ export default function Eletronics() {
                 </ul>
             </S.SomeProducts>
         </>
-    )
+    );
 }

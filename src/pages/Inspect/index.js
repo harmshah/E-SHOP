@@ -1,36 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { ApiContext } from '../../contexts/apiContext';
-import api from '../../services/api';
+import { ApiContext } from '../../contexts/apiContext'; // Import the ApiContext for accessing product data
+import api from '../../services/api'; // Import the API service for making requests
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify'; // Import toast notifications for user feedback
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
-import { FiShoppingCart } from 'react-icons/fi';
+import { FiShoppingCart } from 'react-icons/fi'; // Import the shopping cart icon
 
-import Loading from '../../components/Loading';
+import Loading from '../../components/Loading'; // Import the Loading component
 
-import * as S from "./styles";
+import * as S from "./styles"; // Import styled components from './styles'
 
 export default function Inspect(props) {
-    const history = useHistory();
-    const { allProducts } = useContext(ApiContext);
+    const history = useHistory(); // Initialize useHistory for navigation
+    const { allProducts } = useContext(ApiContext); // Access product data from ApiContext
 
-    const id = props.match.params.id;
-    const index = parseInt(id);
+    const id = props.match.params.id; // Get the product ID from the URL parameter
+    const index = parseInt(id); // Convert the ID to an integer
 
-    const [product, setProduct] = useState({});
-    const [loading, setLoading] = useState(false);
-    const [quantity, setQuantity] = useState(1);
+    const [product, setProduct] = useState({}); // Initialize state for the selected product
+    const [loading, setLoading] = useState(false); // Initialize loading state
+    const [quantity, setQuantity] = useState(1); // Initialize state for the quantity of the product
 
     useEffect(() => {
         async function loadProduct() {
             setLoading(true);
-            const response = await api.get(`products/${index}`);
+            const response = await api.get(`products/${index}`); // Fetch the product data from the API
 
             if (response.data === null) {
-                history.replace('/');
+                history.replace('/'); // Redirect to the home page if the product doesn't exist
                 return;
             }
 
@@ -42,16 +42,17 @@ export default function Inspect(props) {
                 price: response.data.price,
                 rating: response.data.rating,
                 title: response.data.title,
-                quantity: 1
+                quantity: 1 // Set the initial quantity to 1
             };
 
-            setProduct(p);
-            setLoading(false);
+            setProduct(p); // Set the fetched product data
+            setLoading(false); // Finish loading
         }
 
-        loadProduct();
+        loadProduct(); // Call the function to load the product data
     }, []);
 
+    // Function to add the product to the cart
     function addItemOnCart() {
         const myList = localStorage.getItem('products');
         let savedProducts = JSON.parse(myList) || [];
@@ -60,6 +61,7 @@ export default function Inspect(props) {
         );
 
         if (hasProduct) {
+            // Show a toast notification if the product is already in the cart
             toast.info('This product is already in the cart.', {
                 position: "top-left",
                 autoClose: 2000,
@@ -72,8 +74,9 @@ export default function Inspect(props) {
             return;
         }
 
-        savedProducts.push(product);
+        savedProducts.push(product); // Add the product to the cart
         localStorage.setItem('products', JSON.stringify(savedProducts));
+        // Show a toast notification for adding the product to the cart
         toast.success('Product added to the cart!', {
             position: "top-left",
             autoClose: 1500,
@@ -85,19 +88,22 @@ export default function Inspect(props) {
         });
     }
 
+    // Function to decrease the quantity of the product
     function removeQuantity() {
         if (product.quantity === 0) {
-            return;
+            return; // Prevent negative quantity
         }
-        product.quantity -= 1;
-        setQuantity(quantity - 1);
+        product.quantity -= 1; // Decrease the quantity
+        setQuantity(quantity - 1); // Update the state
     }
 
+    // Function to increase the quantity of the product
     function addQuantity() {
-        product.quantity += 1;
-        setQuantity(quantity + 1);
+        product.quantity += 1; // Increase the quantity
+        setQuantity(quantity + 1); // Update the state
     }
 
+    // Render the component elements
     return (
         <>
             <S.Breadcrumb>
@@ -108,7 +114,7 @@ export default function Inspect(props) {
                 <p>{product.title}</p>
             </S.Breadcrumb>
 
-            {loading && <Loading />}
+            {loading && <Loading />} {/* Display loading spinner if loading is true */}
 
             {!loading && (
                 <S.InspectItem>
@@ -117,7 +123,7 @@ export default function Inspect(props) {
                     </S.ImageProduct>
 
                     <S.InfoProduct>
-                        <S.TitleCompany>Dev Company</S.TitleCompany>
+                        <S.TitleCompany>E-Shop</S.TitleCompany>
                         <h1>{product.title}</h1>
                         <p>{product.description}</p>
                         <span>${product.price}</span>

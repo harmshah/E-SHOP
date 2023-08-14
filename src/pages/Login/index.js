@@ -10,29 +10,37 @@ import styles from "./Login.module.css"; // Import the CSS module for styling
 function Login() {
   const history = useHistory(); // Get the history object
 
+  // State to hold the input values
   const [values, setValues] = useState({
     email: "",
     pass: "",
   });
 
+  // State to manage error message and submit button disabling
   const [errorMsg, setErrorMsg] = useState("");
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
+  // Function to handle form submission
   const handleSubmission = async () => {
+    // Check if email and password fields are filled
     if (!values.email || !values.pass) {
       setErrorMsg("Fill all fields");
       return;
     }
     setErrorMsg("");
 
+    // Disable the submit button while processing
     setSubmitButtonDisabled(true);
 
     try {
+      // Sign in the user using Firebase authentication
       await signInWithEmailAndPassword(auth, values.email, values.pass);
 
+      // Re-enable the submit button and redirect to home page
       setSubmitButtonDisabled(false);
       history.push("/");
     } catch (error) {
+      // Re-enable the submit button and display error message
       setSubmitButtonDisabled(false);
       if (error.message == "Firebase: Error (auth/user-not-found).") {
         error.message = "Please enter correct Username."
@@ -51,6 +59,7 @@ function Login() {
       <div className={styles.innerBox}>
         <h1 className={styles.heading}>Login</h1>
 
+        {/* Input component for email */}
         <InputControl
           type="email"
           name="email"
@@ -60,6 +69,7 @@ function Login() {
           onChange={(e) => setValues({ ...values, email: e.target.value })}
         />
 
+        {/* Input component for password */}
         <InputControl
           type="password"
           name="pass"
@@ -71,12 +81,14 @@ function Login() {
 
         <div className={styles.footer}>
           <b className={styles.error}>{errorMsg}</b>
+          {/* Login button */}
           <button onClick={handleSubmission} disabled={submitButtonDisabled}>
             Login
           </button>
           <p>
             Don't have an account?{" "}
             <span>
+              {/* Link to the registration page */}
               <Link to="/register">Sign up</Link>
             </span>
           </p>

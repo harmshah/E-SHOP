@@ -136,6 +136,9 @@ export default function Header() {
                 <li><Link to="/electronics" onClick={() => setShowNav(false)}>Electronics</Link></li>
                 <li><Link to="/login" onClick={() => setShowNav(false)}>Login</Link></li>
                 <li><Link to="/register" onClick={() => setShowNav(false)}>Register</Link></li>
+                <li><Link to="/about" onClick={() => setShowNav(false)}>About Us</Link></li>
+                <li><Link to="/profile" onClick={() => setShowNav(false)}>Profile</Link></li>
+                <li><Link to="/userlist" onClick={() => setShowNav(false)}>User List</Link></li>
 
               </nav>)}
         </S.MenuHamburguer>

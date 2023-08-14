@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom'; // Import Link for navigation
+import { useForm } from "react-hook-form"; // Import useForm for form handling
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import * as yup from "yup"; // Import yup for form validation
 
-import * as S from "./styles";
+import * as S from "./styles"; // Import styles from the styles module
 
+// Define the validation schema using yup
 const schema = yup
     .object({
         email: yup
@@ -21,11 +22,13 @@ export default function Payment() {
     const [total, setTotal] = useState(0);
     const [qtdItems, setQtdItems] = useState(0);
 
+    // Load cart products from local storage on component mount
     useEffect(() => {
         const listaProducts = localStorage.getItem('products');
         setProductsOnCart(JSON.parse(listaProducts) || []);
     }, [productsOnCart]);
 
+    // Calculate total price and quantity of items in the cart
     useEffect(() => {
         let totalPrice = 0;
         let qtd = 0;
@@ -38,12 +41,14 @@ export default function Payment() {
         setQtdItems(qtd);
     }, []);
 
+    // Use react-hook-form for form handling
     const {
         handleSubmit,
     } = useForm({
         resolver: yupResolver(schema),
     });
 
+    // Function to handle form submission
     function onSubmit(userData) {
         console.log(userData);
     }
@@ -89,8 +94,6 @@ export default function Payment() {
                                     placeholder='Expiration Date'
                                 />
                             </S.DivInputCard>
-
-                            
                         </S.Form>
                     </div>
 
@@ -100,6 +103,7 @@ export default function Payment() {
                 </S.ContainerLeft>
 
                 <S.ContainerRight>
+                    {/* Map through products in the cart and display them */}
                     {productsOnCart.map(item => (
                         <S.Product key={item.id}>
                             <img src={item.image} alt={item.title} />
@@ -118,7 +122,6 @@ export default function Payment() {
                     </S.Total>
                 </S.ContainerRight>
             </S.ContainerMain>
-
         </>
     );
 }
