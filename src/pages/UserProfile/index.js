@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth, database } from "../../services/firebase";
 import { ref, onValue } from 'firebase/database';
-import { Table } from 'react-bootstrap';
 import * as S from "./styles";
 
 export default function UserProfile() {
@@ -34,31 +33,35 @@ export default function UserProfile() {
     }, [tableData, userEmail]);
 
     return (
-        <div className="container my-5">
-            <S.Breadcrumb>
-                <a href='/'>Home</a>
-                <span>/</span>
-                <p>User's Profile</p>
-            </S.Breadcrumb>
+        <S.Container>
+            <div className="container my-5">
+                <S.Breadcrumb>
+                    <a href='/'>Home</a>
+                    <span>/</span>
+                    <p>User's Profile</p>
+                </S.Breadcrumb>
+                <S.SeeProductsCards>
+                    <div className="card text-center h-100">
+                        <div className="form my-3" style={{ marginBottom: '10px' }}>
+                            <label htmlFor="firstName" style={{ marginRight: '10px', fontWeight: "bold"  }}>FirstName: </label>
+                            {userData.firstname}
+                        </div>
+                        <div className="form my-3" style={{ marginBottom: '10px' }}>
+                            <label htmlFor="lastName" style={{ marginRight: '10px', fontWeight: "bold"  }}>LastName: </label>
+                            {userData.lastname}
+                        </div>
+                        <div className="form my-3" style={{ marginBottom: '10px' }}>
+                            <label htmlFor="email" style={{ marginRight: '10px', fontWeight: "bold" }}>Email: </label>
+                            {userEmail}
+                        </div>
+                        <div className="form my-3" style={{ marginBottom: '10px' }}>
+                            <label htmlFor="password" style={{ marginRight: '10px', fontWeight: "bold"  }}>Password: </label>
+                            {userData.pass}
+                        </div>
+                    </div>
+                </S.SeeProductsCards>
 
-            <div className="card text-center h-100">
-                <div className="form my-3">
-                    <label htmlFor="firstName" style={{ marginRight: '10px' }}>FirstName: </label>
-                    {userData.firstname}
-                </div>
-                <div className="form my-3">
-                    <label htmlFor="lastName" style={{ marginRight: '10px' }}>LastName: </label>
-                    {userData.lastname}
-                </div>
-                <div className="form my-3">
-                    <label htmlFor="email" style={{ marginRight: '10px' }}>Email: </label>
-                    {userEmail}
-                </div>
-                <div className="form my-3">
-                    <label htmlFor="password" style={{ marginRight: '10px' }}>Password: </label>
-                    {userData.pass}
-                </div>
             </div>
-        </div>
+        </S.Container>
     );
 }
